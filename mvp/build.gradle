@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.limedroid'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+    buildToolsVersion '27.0.3'
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies["appcompat-v7"]
+    api rootProject.ext.dependencies["support-v4"]
+    api rootProject.ext.dependencies["exifinterface"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["annotations"]
+    api rootProject.ext.dependencies["butterknife"]
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+    api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-android"]
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    api rootProject.ext.dependencies["rxpermissions"]
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["bugly"]
+    //okgo
+    //    api rootProject.ext.dependencies["okgo"]
+    //    api rootProject.ext.dependencies["okrx2"]
+    // Android 开发工具代码
+    api 'com.blankj:utilcode:1.19.0'
+    // 通用 adapter
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.+'
+    // 提高 Android UI 开发效率的 UI 库
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}

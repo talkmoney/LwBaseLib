@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.limedroid'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -25,29 +25,31 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api rootProject.ext.dependencies["appcompat-v7"]
-    api rootProject.ext.dependencies["support-v4"]
-    api rootProject.ext.dependencies["exifinterface"]
-    api rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["annotations"]
-    api rootProject.ext.dependencies["butterknife"]
-    api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["gson"]
-    api rootProject.ext.dependencies["rxandroid"]
-    api rootProject.ext.dependencies["rxjava"]
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["retrofit-converter-gson"]
-    api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
-    api rootProject.ext.dependencies["okhttp3"]
-    api rootProject.ext.dependencies["rxlifecycle"]
-    api rootProject.ext.dependencies["rxlifecycle-android"]
-    api rootProject.ext.dependencies["rxlifecycle-components"]
-    api rootProject.ext.dependencies["rxpermissions"]
-    api rootProject.ext.dependencies["eventbus"]
-    api rootProject.ext.dependencies["bugly"]
-    //okgo
-    //    api rootProject.ext.dependencies["okgo"]
-    //    api rootProject.ext.dependencies["okrx2"]
+    api 'com.android.support:appcompat-v7:27.0.2'
+    api 'com.android.support:support-v4:27.0.2'
+    api 'com.android.support:exifinterface:27.0.2'
+    api 'com.android.support:design:27.0.2'
+    api 'com.android.support:support-annotations:27.0.2'
+
+    api 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.google.code.gson:gson:2.6.2'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.0.1'
+
+    api 'com.squareup.retrofit2:retrofit:2.2.0'
+    api 'com.squareup.retrofit2:converter-gson:2.2.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    api 'com.squareup.okhttp3:okhttp:3.3.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    api 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    api 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+    api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
+    api 'com.tencent.bugly:crashreport:+'
+
     // Android 开发工具代码
     api 'com.blankj:utilcode:1.19.0'
     // 通用 adapter

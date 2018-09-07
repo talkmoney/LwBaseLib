@@ -1,13 +1,61 @@
 package com.luwei.lwbaselib;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.droidlover.xdroidmvp.base.LwBaseActivity;
+
+public class MainActivity extends LwBaseActivity {
+
+    @BindView(R.id.tv_content)
+    TextView mTvContent;
+
+    @Override
+    public boolean setIsSetStatus() {
+        return false;
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initData() {
+        mTvContent.setText("hello world!!!");
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public Object newP() {
+        return null;
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

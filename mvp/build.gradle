@@ -51,7 +51,7 @@ dependencies {
     api 'com.tencent.bugly:crashreport:+'
 
     // Android 开发工具代码
-    api 'com.blankj:utilcode:1.19.0'
+    implementation 'com.blankj:utilcode:1.19.0'
     // 通用 adapter
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.+'
     // 提高 Android UI 开发效率的 UI 库

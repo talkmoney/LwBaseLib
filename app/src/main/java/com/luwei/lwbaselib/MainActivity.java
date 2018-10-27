@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.droidlover.xdroidmvp.base.LwBaseActivity;
+import cn.luwei.mvp.base.LwBaseActivity;
 
 public class MainActivity extends LwBaseActivity {
 

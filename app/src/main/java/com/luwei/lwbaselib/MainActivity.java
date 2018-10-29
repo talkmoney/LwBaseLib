@@ -1,10 +1,23 @@
 package com.luwei.lwbaselib;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.luwei.lwbaselib.activity.AdapterActivity;
+import com.luwei.lwbaselib.activity.DialogActivity;
+import com.luwei.lwbaselib.activity.ImageActivity;
+import com.luwei.lwbaselib.activity.LogActivity;
+import com.luwei.lwbaselib.activity.PermissionActivity;
+import com.luwei.lwbaselib.activity.PopupActivity;
+import com.luwei.lwbaselib.activity.RxBusActivity;
+import com.luwei.lwbaselib.activity.ToastActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.luwei.mvp.base.LwBaseActivity;
 
 public class MainActivity extends LwBaseActivity {
@@ -52,10 +65,36 @@ public class MainActivity extends LwBaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.btn_to_image, R.id.btn_to_log, R.id.btn_to_dialog, R.id.btn_to_popup
+            , R.id.btn_to_adapter,R.id.btn_to_permission, R.id.btn_to_RxBus, R.id.btn_to_toast})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_to_image:
+                startActivity(new Intent(MainActivity.this, ImageActivity.class));
+                break;
+            case R.id.btn_to_log:
+                startActivity(new Intent(MainActivity.this, LogActivity.class));
+                break;
+            case R.id.btn_to_dialog:
+                startActivity(new Intent(MainActivity.this, DialogActivity.class));
+                break;
+            case R.id.btn_to_popup:
+                startActivity(new Intent(MainActivity.this, PopupActivity.class));
+                break;
+            case R.id.btn_to_adapter:
+                startActivity(new Intent(MainActivity.this, AdapterActivity.class));
+                break;
+            case R.id.btn_to_permission:
+                startActivity(new Intent(MainActivity.this, PermissionActivity.class));
+                break;
+            case R.id.btn_to_RxBus:
+                startActivity(new Intent(MainActivity.this, RxBusActivity.class));
+                break;
+            case R.id.btn_to_toast:
+                startActivity(new Intent(MainActivity.this, ToastActivity.class));
+                break;
+            default:
+                break;
+        }
     }
 }

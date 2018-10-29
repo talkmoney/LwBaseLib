@@ -10,8 +10,8 @@
         android:name="android.test.InstrumentationTestRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for cn.droidlover.xdroidmvp.test"
-        android:targetPackage="cn.droidlover.xdroidmvp.test" />
+        android:label="Tests for cn.luwei.mvp.test"
+        android:targetPackage="cn.luwei.mvp.test" />
 
     <application
         android:allowBackup="true"

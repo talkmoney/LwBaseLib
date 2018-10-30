@@ -9,3 +9,5 @@
 .externalNativeBuild
 mvp/build/
 mvp/.idea/
+common/build/
+common/.idea/

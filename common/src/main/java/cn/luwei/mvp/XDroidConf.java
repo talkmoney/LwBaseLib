@@ -1,6 +1,5 @@
 package cn.luwei.mvp;
 
-import cn.luwei.mvp.imageloader.ILoader;
 import cn.luwei.mvp.router.Router;
 
 /**
@@ -19,10 +18,6 @@ public class XDroidConf {
     // #router
     public static final int ROUTER_ANIM_ENTER = Router.RES_NONE;
     public static final int ROUTER_ANIM_EXIT = Router.RES_NONE;
-
-    // #imageloader
-    public static final int IL_LOADING_RES = ILoader.Options.RES_NONE;
-    public static final int IL_ERROR_RES = ILoader.Options.RES_NONE;
 
     // #dev model
     public static final boolean DEV = true;

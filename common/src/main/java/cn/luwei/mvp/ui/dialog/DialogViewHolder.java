@@ -1,4 +1,4 @@
-package cn.luwei.mvp.base;
+package cn.luwei.mvp.ui.dialog;
 
 import android.util.SparseArray;
 import android.view.View;
@@ -9,17 +9,17 @@ import android.widget.TextView;
  * 文件描述：
  */
 
-public class ViewHolder {
+public class DialogViewHolder {
     private SparseArray<View> views;
     private View convertView;
 
-    private ViewHolder(View view) {
+    private DialogViewHolder(View view) {
         this.convertView = view;
         this.views = new SparseArray();
     }
 
-    public static ViewHolder create(View view) {
-        return new ViewHolder(view);
+    public static DialogViewHolder create(View view) {
+        return new DialogViewHolder(view);
     }
 
     public <T extends View> T getView(int viewId) {
@@ -36,6 +36,10 @@ public class ViewHolder {
         return this.convertView;
     }
 
+    public void setVisibility(int viewId,boolean isShow){
+        View view = this.getView(viewId);
+        view.setVisibility(isShow?View.VISIBLE:View.GONE);
+    }
     public void setText(int viewId, String text) {
         TextView textView = (TextView)this.getView(viewId);
         textView.setText(text);

@@ -9,16 +9,22 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowBackground">@color/transparent_color</item>               <!--背景透明-->
         <item name="android:background">@color/transparent_color</item>
-        <item name="android:backgroundDimAmount">0.5</item>
-        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item><!--动画-->
+        <item name="android:windowBackground">@color/transparent_color</item>               <!--背景透明-->
+        <item name="android:backgroundDimAmount">0.5</item>                                 <!--背景透明度-->
+        <item name="android:windowAnimationStyle">@style/BottomActionSheetDialogAnimation</item><!--动画-->
     </style>
 
     <!--弹窗的动画样式-->
-    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+    <style name="BottomActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/bottom_anim_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/bottom_anim_dialog_out</item>
-        <item name="android:windowBackground">@null</item>
     </style>
+
+    <style name="TopActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/top_anim_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/top_anim_dialog_out</item>
+    </style>
+
+
 </resources>

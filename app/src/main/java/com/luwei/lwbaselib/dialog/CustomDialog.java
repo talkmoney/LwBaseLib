@@ -59,7 +59,7 @@ public class CustomDialog extends BaseDialog {
     }
 
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.dialog_custom;
     }
 

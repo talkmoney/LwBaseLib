@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ public abstract class BaseDialog extends DialogFragment {
     private int mTopMargin = 0;
     private int mBottomMargin = 0;
     private int mAnimationsStyleId = 0;
+    // dialog 屏幕宽度的百分比
+    private float mDialogWidthPercent = 1f;
     protected ConfirmListener mConfirmLitener;
     protected CancelListener mCancelListener;
 
@@ -97,9 +100,8 @@ public abstract class BaseDialog extends DialogFragment {
 
 
         // 设置中间显示的时候，设置左右边距
-        if (params.gravity == Gravity.CENTER && mLeftMargin == 0) {
-            mLeftMargin = dp2px(45);
-            mRightMargin = dp2px(45);
+        if (params.gravity == Gravity.CENTER && mDialogWidthPercent == 1) {
+            mDialogWidthPercent = 0.75f;
         }
 
         // 设置动画样式
@@ -110,8 +112,9 @@ public abstract class BaseDialog extends DialogFragment {
             window.setWindowAnimations(mAnimationsStyleId);
         }
 
-        // 设置边距
+        // 设置 dialog 的内边距
         window.getDecorView().setPadding(mLeftMargin, mTopMargin, mRightMargin, mBottomMargin);
+
 
         // 设置透明度
         if (mTransparent) {
@@ -119,6 +122,11 @@ public abstract class BaseDialog extends DialogFragment {
         }
 
         window.setAttributes(params);
+
+        // 设置 dialog 的屏幕宽度占比
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        window.setLayout((int) (dm.widthPixels * mDialogWidthPercent), ViewGroup.LayoutParams.WRAP_CONTENT);
 
     }
 
@@ -173,7 +181,7 @@ public abstract class BaseDialog extends DialogFragment {
      * @param leftMargin
      * @return
      */
-    public BaseDialog setLeftMargin(int leftMargin) {
+    protected BaseDialog setLeftMargin(int leftMargin) {
         this.mLeftMargin = dp2px(leftMargin);
         return this;
     }
@@ -184,7 +192,7 @@ public abstract class BaseDialog extends DialogFragment {
      * @param rightMargin
      * @return
      */
-    public BaseDialog setRightMargin(int rightMargin) {
+    protected BaseDialog setRightMargin(int rightMargin) {
         this.mRightMargin = dp2px(rightMargin);
         return this;
     }
@@ -196,7 +204,7 @@ public abstract class BaseDialog extends DialogFragment {
      * @param topMargin
      * @return
      */
-    public BaseDialog setTopMargin(int topMargin) {
+    protected BaseDialog setTopMargin(int topMargin) {
         this.mTopMargin = dp2px(topMargin);
         return this;
     }
@@ -208,11 +216,15 @@ public abstract class BaseDialog extends DialogFragment {
      * @param bottomMargin
      * @return
      */
-    public BaseDialog setBottomMargin(int bottomMargin) {
+    protected BaseDialog setBottomMargin(int bottomMargin) {
         this.mBottomMargin = dp2px(bottomMargin);
         return this;
     }
 
+    public BaseDialog setDialogWidthPercent(float mDialogWidthPercent) {
+        this.mDialogWidthPercent = mDialogWidthPercent;
+        return this;
+    }
 
     public int dp2px(float dipValue) {
         float scale = getActivity().getResources().getDisplayMetrics().density;
@@ -232,7 +244,7 @@ public abstract class BaseDialog extends DialogFragment {
         }
     }
 
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     public abstract void onCreateView(DialogViewHolder viewHolder, BaseDialog dialog);
 

@@ -9,7 +9,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsTranslucent">false</item>
-        <item name="android:background">@color/transparent_color</item>
+        <!--<item name="android:background">@color/transparent_color</item>-->
         <item name="android:windowBackground">@color/transparent_color</item>               <!--背景透明-->
         <item name="android:backgroundDimAmount">0.5</item>                                 <!--背景透明度-->
         <item name="android:windowAnimationStyle">@style/BottomActionSheetDialogAnimation</item><!--动画-->

@@ -11,18 +11,29 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luwei.lwbaselib.R;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.luwei.mvp.ui.dialog.ConfirmListener;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 import com.luwei.lwbaselib.dialog.CustomDialog;
+import com.luwei.lwbaselib.dialog.LoadingDialog;
+import com.luwei.lwbaselib.dialog.ProgressDialog;
 
 /**
  * dialog 的使用示例
@@ -44,7 +55,11 @@ public class DialogActivity extends AppCompatActivity {
         listStr.add("CustomDialog 顶部显示");
         listStr.add("CustomDialog 中部显示");
         listStr.add("CustomDialog 底部显示");
+        listStr.add("LoadingDialog");
+        listStr.add("ProgressDialog");
 
+        LinkedHashMap<String,String> map;
+        map.put()
         adapter = new ArrayAdapter(this, listStr);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(adapter);
@@ -52,6 +67,7 @@ public class DialogActivity extends AppCompatActivity {
 
     }
 
+    Disposable disposable;
 
     private void onItemClick(int pos) {
         switch (pos) {
@@ -64,8 +80,73 @@ public class DialogActivity extends AppCompatActivity {
             case 2:
                 showBottomCustomDialog();
                 break;
+            case 3:
+                showLoadingDialog();
+                mRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoadingDialog();
+                    }
+                }, 3000);
+                break;
+            case 4:
+                if (disposable != null && !disposable.isDisposed()) {
+                    return;
+                }
+                disposable = Observable.interval(1, 1, TimeUnit.SECONDS)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<Long>() {
+                            @Override
+                            public void accept(Long aLong) throws Exception {
+                                if (aLong > 10) {
+                                    disposable.dispose();
+                                    hideProgress();
+                                } else {
+                                    showProgress(Integer.parseInt(String.valueOf(aLong)), 10);
+                                }
+                            }
+                        });
+                break;
             default:
                 break;
+        }
+    }
+
+    private ProgressDialog progressDialog;
+
+    private void showProgress(int progress, int maxProgress) {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog.newInstance();
+        }
+        progressDialog.setMaxProgress(maxProgress)
+                .setProgress(progress)
+                .setCanCancel(false)
+                .showDialog(this);
+    }
+
+    private void hideProgress() {
+        if (progressDialog != null
+                && progressDialog.isVisible()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    private LoadingDialog loadingDialog;
+
+    private void showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog.newInstance();
+        }
+        loadingDialog
+                .setCanCancel(true)
+                .showDialog(this);
+    }
+
+    private void hideLoadingDialog() {
+        if (loadingDialog != null
+                && loadingDialog.isVisible()) {
+            loadingDialog.dismiss();
         }
     }
 
